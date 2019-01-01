@@ -2,4 +2,12 @@
     <string name="app_name">PetitionHelper</string>
     <string name="action_settings">Settings</string>
     <string name="section_format">Hello World from section: %1$d</string>
+    <string name="SignatureLastName">Nom</string>
+    <string name="SignatureLastNameHint">Nom du signataire</string>
+    <string name="SignatureFirstName">Prénom</string>
+    <string name="SignatureFirstNameHint">Prénom du signataire</string>
+    <string name="SignatureTown">Code postale et commune</string>
+    <string name="SignatureTownHint">Code postale et commune d\'enregistrement sur les listes élecorales du signataire</string>
+    <string name="Validation">Validation de la signature</string>
+    <string name="ValidationButton">Enregistrer</string>
 </resources>
