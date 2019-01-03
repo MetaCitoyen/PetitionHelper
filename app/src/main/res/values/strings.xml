@@ -7,7 +7,15 @@
     <string name="SignatureFirstName">Prénom</string>
     <string name="SignatureFirstNameHint">Prénom du signataire</string>
     <string name="SignatureTown">Code postale et commune</string>
-    <string name="SignatureTownHint">Code postale et commune d\'enregistrement sur les listes élecorales du signataire</string>
+    <string name="SignatureTownHint">Commune</string>
     <string name="Validation">Validation de la signature</string>
     <string name="ValidationButton">Enregistrer</string>
+    <string name="SignatureMail" />
+    <string name="SignatureContact">Mail et téléphone</string>
+    <string name="SignatureMailHint">eMail</string>
+    <string name="SignaturePhoneHint">Téléphone</string>
+    <string name="SignatureMailServerHint" >eMail server</string>
+    <string name="SignatureTownCodeHint">Code postale</string>
+    <string name="SignatureRef">Référence du document de signature</string>
+    <string name="SignatureLine">Ligne de signature sur le document de référence</string>
 </resources>

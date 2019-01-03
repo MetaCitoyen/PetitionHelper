@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import android.widget.AutoCompleteTextView;
+import android.widget.EditText;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
@@ -77,15 +78,33 @@ public class MainActivity extends AppCompatActivity {
                     } break;
 
                     case 3: {
+
+                    } break;
+
+                    case 4: {
                         AutoCompleteTextView acLastName = (AutoCompleteTextView) findViewById(R.id.autoCompleteTextViewLastName);
                         AutoCompleteTextView acFirstName = (AutoCompleteTextView) findViewById(R.id.autoCompleteTextViewFirstName);
+                        AutoCompleteTextView acTownCode = (AutoCompleteTextView) findViewById(R.id.autoCompleteTextViewTownCode);
                         AutoCompleteTextView acTown = (AutoCompleteTextView) findViewById(R.id.autoCompleteTextViewTown);
+                        EditText etMail = (EditText) findViewById(R.id.editTextMailBase);
+                        AutoCompleteTextView tvMailServer = (AutoCompleteTextView) findViewById(R.id.autoCompleteTextViewMailServer);
+                        EditText etPhone = (EditText) findViewById(R.id.editTextPhone);
+
                         TextView tvFirstName = (TextView) findViewById(R.id.textViewFirstName);
                         TextView tvLastName = (TextView) findViewById(R.id.textViewLastName);
                         TextView tvTown = (TextView) findViewById(R.id.textViewTown);
+                        TextView tvMail = (TextView) findViewById(R.id.textViewMail);
+                        TextView tvPhone = (TextView) findViewById(R.id.textViewPhone);
+
                         if( tvFirstName != null && acFirstName != null) tvFirstName.setText(acFirstName.getText());
                         if( tvLastName != null && acLastName != null ) tvLastName.setText(acLastName.getText());
-                        if( tvTown != null && acTown != null) tvTown.setText(acTown.getText());
+                        if( tvTown != null && acTown != null && acTownCode != null) tvTown.setText(String.format("%s %s",
+                                acTownCode.getText(),
+                                acTown.getText()));
+                        if( tvMail != null && etMail != null && tvMailServer != null) tvMail.setText(String.format("%s@%s",
+                                etMail.getText(),
+                                tvMailServer.getText()));
+                        if( tvPhone != null && etPhone != null) tvPhone.setText(etPhone.getText());
                     } break;
 
                 }
@@ -140,6 +159,8 @@ public class MainActivity extends AppCompatActivity {
                 case 2:
                     return new Tab3Town();
                 case 3:
+                    return new Tab4Contact();
+                case 4:
                     return new Tab4Validation();
                 default:
                     return null;
@@ -148,8 +169,7 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public int getCount() {
-            // Show 3 total pages.
-            return 4;
+            return 5;
         }
     }
 

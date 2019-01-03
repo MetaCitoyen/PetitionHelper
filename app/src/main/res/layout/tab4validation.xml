@@ -62,11 +62,40 @@
             android:layout_height="wrap_content"
             android:gravity="center_horizontal" />
 
+        <TextView
+            android:id="@+id/textViewMail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal" />
+
+        <TextView
+            android:id="@+id/textViewPhone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal" />
+
+        <EditText
+            android:id="@+id/editTextRef"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/SignatureRef"
+            android:inputType="textPersonName" />
+
+        <EditText
+            android:id="@+id/editTextLine"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/SignatureLine"
+            android:inputType="numberDecimal" />
+
         <Button
             android:id="@+id/button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/ValidationButton" />
+
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

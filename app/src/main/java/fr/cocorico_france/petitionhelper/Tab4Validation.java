@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import java.io.File;
@@ -50,7 +51,14 @@ public class Tab4Validation extends Fragment {
                 MainActivity main = (MainActivity) getActivity();
                 AutoCompleteTextView tvFirstName = (AutoCompleteTextView) main.findViewById(R.id.autoCompleteTextViewFirstName);
                 AutoCompleteTextView tvLastName = (AutoCompleteTextView) main.findViewById(R.id.autoCompleteTextViewLastName);
+                AutoCompleteTextView tvTownCode = (AutoCompleteTextView) main.findViewById(R.id.autoCompleteTextViewTownCode);
                 AutoCompleteTextView tvTown = (AutoCompleteTextView) main.findViewById(R.id.autoCompleteTextViewTown);
+                EditText etMail = (EditText) main.findViewById(R.id.editTextMailBase);
+                AutoCompleteTextView tvMailServer = (AutoCompleteTextView) main.findViewById(R.id.autoCompleteTextViewMailServer);
+                EditText etPhone = (EditText) main.findViewById(R.id.editTextPhone);
+                EditText etRef = (EditText) main.findViewById(R.id.editTextRef);
+                EditText etLine = (EditText) main.findViewById(R.id.editTextLine);
+
                 if( perm &&
                         (tvFirstName != null) &&
                         (tvLastName != null) &&
@@ -65,13 +73,26 @@ public class Tab4Validation extends Fragment {
                     try {
                         FileOutputStream stream = new FileOutputStream(file, true);
                         try {
-                            stream.write(String.format("%s;%s;%s;%s\n", sdf.format(currentTime),
+                            stream.write(String.format("%s;%s;%s;%s;%s;%s@%s;%s;%s;%s\n",
+                                    sdf.format(currentTime),
+                                    etRef.getText().toString(),
+                                    etLine.getText().toString(),
                                     tvLastName.getText().toString(),
                                     tvFirstName.getText().toString(),
-                                    tvTown.getText().toString() ).getBytes());
+                                    etMail.getText().toString(),
+                                    tvMailServer.getText().toString(),
+                                    tvTownCode.getText().toString(),
+                                    tvTown.getText().toString(),
+                                    etPhone.getText().toString()).getBytes());
                             tvFirstName.setText("");
                             tvLastName.setText("");
+                            etMail.setText("");
+                            tvMailServer.setText("");
+                            tvTownCode.setText("");
                             tvTown.setText("");
+                            etPhone.setText("");
+                            etLine.setText(Integer.toString(Integer.valueOf(etLine.getText().toString())+1));
+
                         } catch (IOException e) {
                         } finally {
                             stream.close();
