@@ -91,7 +91,11 @@ public class Tab4Validation extends Fragment {
                             tvTownCode.setText("");
                             tvTown.setText("");
                             etPhone.setText("");
-                            etLine.setText(Integer.toString(Integer.valueOf(etLine.getText().toString())+1));
+                            try {
+                                etLine.setText(Integer.toString(Integer.valueOf(etLine.getText().toString()) + 1));
+                            } catch (Exception e) {
+                                etLine.setText("1");
+                            }
 
                         } catch (IOException e) {
                         } finally {

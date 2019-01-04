@@ -88,7 +88,8 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="@string/SignatureLine"
-            android:inputType="numberDecimal" />
+            android:inputType="numberDecimal"
+            android:text="1" />
 
         <Button
             android:id="@+id/button"
