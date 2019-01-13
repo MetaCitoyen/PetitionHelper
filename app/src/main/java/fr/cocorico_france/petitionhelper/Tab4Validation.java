@@ -1,6 +1,7 @@
 package fr.cocorico_france.petitionhelper;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -64,26 +65,29 @@ public class Tab4Validation extends Fragment {
                         (tvLastName != null) &&
                         (tvTown != null) ) {
 
-
-
-                    File directory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
-                    File file = new File(directory, "PetitionHelper.csv");
+                    String fileDirFath = Environment.getExternalStorageDirectory()
+                            + File.separator + "PetitionHelper";
+                    String filePath = fileDirFath + File.separator + "PetitionHelper.csv";
+                    File rep = new File(fileDirFath);
+                    if(!rep.exists()) rep.mkdirs();
+                    File file = new File(filePath);
                     Date currentTime = Calendar.getInstance().getTime();
                     SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd;HHmmss");
                     try {
                         FileOutputStream stream = new FileOutputStream(file, true);
+                        String line = String.format("%s;%s;%s;%s;%s;%s@%s;%s;%s;%s\n",
+                                sdf.format(currentTime),
+                                etRef.getText().toString(),
+                                etLine.getText().toString(),
+                                tvLastName.getText().toString(),
+                                tvFirstName.getText().toString(),
+                                etMail.getText().toString(),
+                                tvMailServer.getText().toString(),
+                                tvTownCode.getText().toString(),
+                                tvTown.getText().toString(),
+                                etPhone.getText().toString());
                         try {
-                            stream.write(String.format("%s;%s;%s;%s;%s;%s@%s;%s;%s;%s\n",
-                                    sdf.format(currentTime),
-                                    etRef.getText().toString(),
-                                    etLine.getText().toString(),
-                                    tvLastName.getText().toString(),
-                                    tvFirstName.getText().toString(),
-                                    etMail.getText().toString(),
-                                    tvMailServer.getText().toString(),
-                                    tvTownCode.getText().toString(),
-                                    tvTown.getText().toString(),
-                                    etPhone.getText().toString()).getBytes());
+                            stream.write(line.getBytes());
                             tvFirstName.setText("");
                             tvLastName.setText("");
                             etMail.setText("");

@@ -1,7 +1,15 @@
 package fr.cocorico_france.petitionhelper;
 
+import android.Manifest;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.os.Build;
+import android.os.Environment;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
@@ -18,8 +26,13 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.io.File;
+import java.io.FileInputStream;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -52,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
-        mViewPager.setOffscreenPageLimit(4);
+        mViewPager.setOffscreenPageLimit(5);
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrollStateChanged(int i) {
@@ -65,23 +78,28 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onPageSelected(int i) {
                 switch (i) {
-                    case 0: {
+                    case 0: { // Last name
 
                     } break;
 
-                    case 1: {
+                    case 1: { // First name
 
                     } break;
 
-                    case 2: {
+                    case 2: { // Code postal
 
                     } break;
 
-                    case 3: {
-
+                    case 3: { // Contact
+                        AutoCompleteTextView tvLastName = (AutoCompleteTextView) findViewById(R.id.autoCompleteTextViewLastName);
+                        Button btAddLastName = (Button) findViewById(R.id.btAddLastName);
+                        btAddLastName.setText(tvLastName.getText().toString().toLowerCase());
+                        AutoCompleteTextView tvFirstName = (AutoCompleteTextView) findViewById(R.id.autoCompleteTextViewFirstName);
+                        Button btAddFirstName = (Button) findViewById(R.id.btAddFirstName);
+                        btAddFirstName.setText(tvFirstName.getText().toString().toLowerCase());
                     } break;
 
-                    case 4: {
+                    case 4: { // Validation
                         AutoCompleteTextView acLastName = (AutoCompleteTextView) findViewById(R.id.autoCompleteTextViewLastName);
                         AutoCompleteTextView acFirstName = (AutoCompleteTextView) findViewById(R.id.autoCompleteTextViewFirstName);
                         AutoCompleteTextView acTownCode = (AutoCompleteTextView) findViewById(R.id.autoCompleteTextViewTownCode);
@@ -132,8 +150,46 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        if( id == R.id.action_send_mail ) {
+            boolean perm = false;
+            if (Build.VERSION.SDK_INT >= 23) {
+                if (checkSelfPermission(android.Manifest.permission.READ_EXTERNAL_STORAGE)
+                        == PackageManager.PERMISSION_GRANTED) {
+                    perm= true;
+                } else {
+                    ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
+                    perm= false;
+                }
+            }
+            else { //you dont need to worry about these stuff below api level 23
+                perm= true;
+            }
+
+
+            if( perm ) {
+                Intent email = new Intent(Intent.ACTION_SEND);
+                email.setType("message/rfc822");
+//                email.putExtra(Intent.EXTRA_EMAIL, new String[]{"mail_to@gmail.com"});
+                email.putExtra(Intent.EXTRA_SUBJECT, "Petition electronique");
+                email.putExtra(Intent.EXTRA_TEXT, "Voici les données de la pétition");
+                String filePath = Environment.getExternalStorageDirectory()
+                        + File.separator + "PetitionHelper"
+                        + File.separator + "PetitionHelper.csv";
+                Uri fileUri = FileProvider.getUriForFile(this,
+                        getApplicationContext().getPackageName() + ".fr.cocorico_france.petitionhelper.provider",
+                        new File(filePath));
+                email.putExtra(Intent.EXTRA_STREAM, fileUri);
+                email.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                email.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                try {
+                    // the user can choose the email client
+                    startActivity(Intent.createChooser(email, "Choose an email client from..."));
+
+                } catch (android.content.ActivityNotFoundException ex) {
+                    Toast.makeText(this, "No email client installed.",
+                            Toast.LENGTH_LONG).show();
+                }
+            }
         }
 
         return super.onOptionsItemSelected(item);

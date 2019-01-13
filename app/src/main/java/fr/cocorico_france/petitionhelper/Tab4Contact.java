@@ -7,6 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
+import android.widget.EditText;
 
 public class Tab4Contact extends Fragment {
     @Override
@@ -23,6 +25,26 @@ public class Tab4Contact extends Fragment {
                 mailServer);
         AutoCompleteTextView textView = rootView.findViewById(R.id.autoCompleteTextViewMailServer);
         textView.setAdapter(adapter);
+        Button btAddFirstName = (Button) rootView.findViewById(R.id.btAddFirstName);
+        btAddFirstName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Button bt = (Button)v;
+                MainActivity main = (MainActivity) getActivity();
+                EditText editTextMailBase = (EditText)main.findViewById(R.id.editTextMailBase);
+                editTextMailBase.setText(editTextMailBase.getText().append(bt.getText()));
+                editTextMailBase.setSelection(editTextMailBase.getText().length());
+            }});
+        Button btAddLastName = (Button) rootView.findViewById(R.id.btAddLastName);
+        btAddLastName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Button bt = (Button)v;
+                MainActivity main = (MainActivity) getActivity();
+                EditText editTextMailBase = (EditText)main.findViewById(R.id.editTextMailBase);
+                editTextMailBase.setText(editTextMailBase.getText().append(bt.getText()));
+                editTextMailBase.setSelection(editTextMailBase.getText().length());
+            }});
         return rootView;
     }
 

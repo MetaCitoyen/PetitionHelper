@@ -61,7 +61,20 @@
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
                 android:hint="@string/SignatureMailServerHint" />
+
         </LinearLayout>
+
+        <Button
+            android:id="@+id/btAddFirstName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="FirstName" />
+
+        <Button
+            android:id="@+id/btAddLastName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="LastName" />
 
         <EditText
             android:id="@+id/editTextPhone"

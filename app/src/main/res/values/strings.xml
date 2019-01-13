@@ -18,4 +18,5 @@
     <string name="SignatureTownCodeHint">Code postale</string>
     <string name="SignatureRef">Référence du document de signature</string>
     <string name="SignatureLine">Ligne de signature sur le document de référence</string>
+    <string name="action_send_mail">Envoie par mail</string>
 </resources>
