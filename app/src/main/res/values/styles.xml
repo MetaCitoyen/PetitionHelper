@@ -17,4 +17,21 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <style name="Autocomplete">
+        <item name="background">@color/green500</item>
+        <item name="colorControlNormal">@color/amber500</item>
+        <item name="colorControlActivated">@color/cyan500</item>
+        <item name="colorControlNormal">@color/cyan500</item>
+        <item name="colorControlActivated">@color/cyan500</item>
+    </style>
+
+    <style name="MyTheme">
+        <item name="android:dropDownListViewStyle">@style/DropDownListViewStyle</item>
+    </style>
+
+    <style name="DropDownListViewStyle">
+        <item name="android:divider">#4F4F4F</item>
+        <item name="android:dividerHeight">1dp</item>
+    </style>
+
 </resources>

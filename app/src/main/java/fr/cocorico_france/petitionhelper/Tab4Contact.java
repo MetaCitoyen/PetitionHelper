@@ -21,7 +21,7 @@ public class Tab4Contact extends Fragment {
         "yahoo.fr", "bbox.fr"};
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(
                 getActivity().getApplicationContext(),
-                android.R.layout.simple_dropdown_item_1line,
+                R.layout.autocomplete_custom,
                 mailServer);
         AutoCompleteTextView textView = rootView.findViewById(R.id.autoCompleteTextViewMailServer);
         textView.setAdapter(adapter);

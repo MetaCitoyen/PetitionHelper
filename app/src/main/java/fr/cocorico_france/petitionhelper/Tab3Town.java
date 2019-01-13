@@ -17,7 +17,7 @@ public class Tab3Town extends Fragment {
         String[] towns = getResources().getStringArray(R.array.towns);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(
                 getActivity().getApplicationContext(),
-                android.R.layout.simple_dropdown_item_1line,
+                R.layout.autocomplete_custom,
                 towns);
         AutoCompleteTextView textView = rootView.findViewById(R.id.autoCompleteTextViewTown);
         textView.setAdapter(adapter);

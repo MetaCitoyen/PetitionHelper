@@ -17,7 +17,7 @@ public class Tab1LastName extends Fragment {
         String[] lastnames = getResources().getStringArray(R.array.lastnames);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(
                 getActivity().getApplicationContext(),
-                android.R.layout.simple_dropdown_item_1line,
+                R.layout.autocomplete_custom,
                 lastnames);
         AutoCompleteTextView textView = rootView.findViewById(R.id.autoCompleteTextViewLastName);
         textView.setAdapter(adapter);
